@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Final Project</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+    
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: rocksalt, sans-serif;
+            color: #0D0000;
+            text-align:center;
+        }
+        header {
+            padding: 6px 10%;
+            text-align:center;
+            
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #001323;
+            font-size: 30pt;
+        }
+        h2 {
+            font-family: raleway-light;
+            display: inline-block;
+            color: #001323;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+        p {
+            font-size: 1em;
+            font-family: raleway-light;
+            color: #001323;
+        }
+        .tracts{
+            color:#810f7c;
+        }
+        .commercial{
+            color:#FF5154;
+        }
+        .vland{
+            color:#94de00;
+        }
+        .vbuildings{
+            color:#2EC4B6;
+        }
+        .improvements{
+            color: #fdb462;
+        }
+        .leaflet-popup-content-wrapper {
+            font-family: raleway-light;
+        }
+        @font-face {
+            font-family: rocksalt;
+            src: url('rocksalt-webfont.woff');
+        }
+        @font-face {
+            font-family: raleway-light;
+            src: url('raleway-light-webfont.woff');
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Economic Development Measures in Philadelphia</h1>
+        <br><h2>Income, Vacancies and Improvements</h2>
+    </header>
+    
+    <div id='map'> </div>
+
+    
+    <footer>
+        <p>Map authored by Amanda Kmetz</p>
+        <p>Click the layer controls at the top right of the map to toggle layers.</p>
+        <p><br><br>
+        Census tracts reflect boundaries as of the 2010 Census. Median household income is a 2017 5-Year Estimate from the American Community Survey.  
+            <br>Tract boundaries and economic data are courtesy of the U.S. Census Bureau.
+            <br><br>Commercial Corridor boundary data is from the City of Philadelphia.
+            <br><br>Vacant Land and Building data is from the City of Philadelphia.
+            <br><br>Storefront Improvement data is from the City of Philadelphia.
+        </p>
+
+    </footer>
+
+    <script src="vacant_buildings.js"></script>
+    <script src="vacant_land.js"></script>
+    <script src="commercial_corridors.js"></script>
+    <script src="storefront_improvements.js"></script>
+    <script src="tracts_med_income.js"></script>
+    <script>
+
+    // create map, set zoom to Philadelphia
+    var map = L.map('map', {
+          center: [39.99, -75.14],
+          zoom: 12,
+    });
+    
+    var tiles = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+	   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	    subdomains: 'abcd',
+	    minZoom: 0,
+	    maxZoom: 20,
+	    ext: 'png'
+    });
+      
+    tiles.addTo(map);
+    
+    // census tracts layers with income data
+    
+    var censusLayers = L.layerGroup().addTo(map);
+   
+    // empty census tracts, set to invisible
+      
+    var tractsLayer0 = L.geoJson(tracts, {
+    style: function(feature) {
+        return {
+            color: 'red',
+            fillColor: 'red',
+            weight: 1,
+            stroke: 1,
+            opacity: 0,
+            fillOpacity: 0
+        } 
+    },
+    filter: function(feature) {
+        if(feature.properties.MEDINCOME == '0') {
+            return feature;
+        }
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupCensus(feature)).openPopup();
+        });
+
+    }
+    }).addTo(censusLayers);
+        
+    // census tracts + income layer 1 - lowest income tracts > 0
+    // for each layer - create a geoJson from tracts, set styles, filter by income
+    // 3 event listeners: mouseover to set opacity and outline color, mouseout to turn it off, and click to build a popup
+        
+    var tractsLayer1 = L.geoJson(tracts, {
+    style: function(feature) {
+        return {
+            color: '#bfd3e6',
+            fillColor: '#bfd3e6',
+            weight: 1,
+            stroke: 1,
+            opacity: .5,
+            fillOpacity: .5
+        } 
+    },
+    filter: function(feature) {
+        if(feature.properties.MEDINCOME > '0' && feature.properties.MEDINCOME <='22111') {
+            return feature;
+        }
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#bfd3e6',
+                opacity: .5,
+                fillOpacity: .5
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupCensus(feature)).openPopup();
+        });
+
+    }
+    }).addTo(censusLayers);
+        
+    // census tracts + income layer 2 
+        
+    var tractsLayer2 = L.geoJson(tracts, {
+    style: function(feature) {
+        return {
+            color: '#9ebcda',
+            fillColor: '#9ebcda',
+            weight: 1,
+            stroke: 1,
+            opacity: .5,
+            fillOpacity: .5
+        } 
+    },
+    filter: function(feature) {
+        if(feature.properties.MEDINCOME > '22111' && feature.properties.MEDINCOME <= '33569') {
+            return feature;
+        }
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#9ebcda',
+                opacity: .5,
+                fillOpacity: .5
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupCensus(feature)).openPopup();
+        });
+
+    }
+    }).addTo(censusLayers);
+        
+    // census tracts + income layer 3
+        
+    var tractsLayer3 = L.geoJson(tracts, {
+    style: function(feature) {
+        return {
+            color: '#8c96c6',
+            fillColor: '#8c96c6',
+            weight: 1,
+            stroke: 1,
+            opacity: .5,
+            fillOpacity: .5
+        } 
+    },
+    filter: function(feature) {
+        if(feature.properties.MEDINCOME > '33569' && feature.properties.MEDINCOME <= '45288') {
+            return feature;
+        }
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#8c96c6',
+                opacity: .5,
+                fillOpacity: .5
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupCensus(feature)).openPopup();
+        });
+
+    }
+    }).addTo(censusLayers);
+        
+    // census tracts + income layer 4
+        
+    var tractsLayer4 = L.geoJson(tracts, {
+    style: function(feature) {
+        return {
+            color: '#8856a7',
+            fillColor: '#8856a7',
+            weight: 1,
+            stroke: 1,
+            opacity: .5,
+            fillOpacity: .5
+        } 
+    },
+    filter: function(feature) {
+        if(feature.properties.MEDINCOME > '45288' && feature.properties.MEDINCOME <= '60271') {
+            return feature;
+        }
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#8856a7',
+                opacity: .5,
+                fillOpacity: .5
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupCensus(feature)).openPopup();
+        });
+
+    }
+    }).addTo(censusLayers);
+        
+    // census tracts + income layer 5
+    
+    var tractsLayer5 = L.geoJson(tracts, {
+    style: function(feature) {
+        return {
+            color: '#810f7c',
+            fillColor: '#810f7c',
+            weight: 1,
+            stroke: 1,
+            opacity: .5,
+            fillOpacity: .5
+        } 
+    },
+    filter: function(feature) {
+        if(feature.properties.MEDINCOME > '60271') {
+            return feature;
+        }
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#810f7c',
+                opacity: .5,
+                fillOpacity: .5
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupCensus(feature)).openPopup();
+        });
+
+    }
+    }).addTo(censusLayers);
+    
+    // commercial corridors
+        
+    var commLayer = L.geoJson(corridors, {
+    style: function(feature) {
+        return {
+            color: '#FF5154',
+            fillColor: '#FF5154',
+            weight: 1,
+            stroke: 1,
+            opacity: .5,
+            fillOpacity: .5
+        } 
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1,
+                color: '#FFFFFF'
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#FF5154',
+                opacity: .5,
+                fillOpacity: .5
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupCorridor(feature)).openPopup();
+        });
+
+    }
+    }).addTo(map);
+        
+    // vacant land
+        
+    var landLayer = L.geoJson(vland, {
+    style: function(feature) {
+        return {
+            color: '#94de00',
+            fillColor: '#94de00',
+            weight: 1,
+            stroke: 1,
+            opacity: .5,
+            fillOpacity: .5
+            
+        } 
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1,
+                color: '#FFFFFF'
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#94de00',
+                opacity: .5,
+                fillOpacity: .5
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupVacant(feature)).openPopup();
+        });
+
+    }
+    }).addTo(map);
+        
+    // vacant buildings
+        
+    var buildingsLayer = L.geoJson(vbuildings, {
+    style: function(feature) {
+        return {
+            color: '#2EC4B6',
+            fillColor: '#2EC4B6', 
+            weight: 1,
+            stroke: 1,
+            opacity: .5,
+            fillOpacity: .5
+        } 
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1,
+                color: '#FFFFFF'
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#2EC4B6',
+                opacity: .5,
+                fillOpacity: .5
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupVacant(feature)).openPopup();
+        });
+
+    }
+    }).addTo(map);
+        
+    
+    // storefront improvements
+        
+    var improveLayer = L.geoJson(improvements, {
+    pointToLayer: function(feature,latlng) {
+        return L.circleMarker(latlng);
+    },
+    style: function(feature) {
+        return {
+            color: '#fdb462',
+            fillColor: '#fdb462',
+            radius: 2,           
+            weight: 1,
+            stroke: 1,
+            fillOpacity: .8,
+            opacity: .8
+        } 
+    },
+    onEachFeature : function(feature,layer) {
+        layer.on('mouseover', function() {
+            layer.setStyle({
+                fillOpacity: 1,
+                opacity: 1,
+                color: '#FFFFFF'
+            });
+        });
+        layer.on('mouseout', function() {
+            layer.setStyle({
+                color: '#fdb462',
+                opacity: .8,
+                fillOpacity: .8
+            });
+        });
+        layer.on('click', function() {
+            layer.bindPopup(buildPopupImprovement(feature)).openPopup();
+        });
+
+    }
+    }).addTo(map);
+        
+    // creation of the variable containing all the layers to add to the layers control
+    // all census layers get added together as a layer group
+        
+    var sourcesLayers = {
+        "<p><div class = 'tracts'>census tracts</div></p>": censusLayers,
+        "<p><div class = 'commercial'>commercial corridors</p>": commLayer,
+        "<p><div class = 'vland'>vacant land</p>": landLayer,
+        "<p><div class = 'vbuildings'>vacant buildings</p>": buildingsLayer,
+        "<p><div class = 'improvements'>storefront improvements</p>": improveLayer
+    }
+    
+               
+    // allows user to control which layers are seen                      
+    L.control.layers(null, sourcesLayers, { collapsed:false}).addTo(map);
+
+    // builds popup for census tract layers
+    function buildPopupCensus(feature){
+        
+        if(feature.properties.MEDINCOME == '0'){
+            return("This is an empty census tract");
+        }
+        
+        return(feature.properties.NAMELSAD10 + "<br>Households: " + feature.properties.HOUSEHOLDS + "<br>Median Household Income: $" + feature.properties.MEDINCOME);
+    }
+        
+    // builds popup for vacant land and buildings layers
+    function buildPopupVacant(feature){
+        return(feature.properties.ADDRESS + "<br>Philadelphia, PA " + feature.properties.ZIPCODE);
+    }
+        
+    // builds popup for commercial corridor layers
+    function buildPopupCorridor(feature){
+        var stage = feature.properties.STAGE;
+        var stageMsg = '';
+        if (stage == '1'){
+            stageMsg = '1. Stable - no significant change';
+        }else if (stage == '2'){
+            stageMsg = '2. Growing - expanded acreage, GLA, or occupancy; broader store mix';
+        }
+        else if (stage == '3'){
+            stageMsg = '3. Declining - reduced acreage, GLA, or occupancy narrowed store mix; less maintenance';
+        }else if (stage == '4'){
+            stageMsg = '4. Redeveloping - repurposing of acreage and GLA thru new investment; more maintenance';
+        }
+
+        return(feature.properties.NAME + "<br>Development Stage: " + stageMsg + "<br>Commercial Vacancy Rate: " + feature.properties.VAC_RATE );
+    }
+        
+    // builds popup for storefront improvements layer
+    function buildPopupImprovement(feature){
+        return(feature.properties.BUSINESS_NAME + "<br>Corridor: " + feature.properties.CORRIDOR + "<br>Amount Received: " + feature.properties.CHECK_AMOUNT);
+    }
+        
+    </script>
+    
+</body>
+
+</html>
