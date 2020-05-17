@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Amanda Kmetz - GIS Portfolio - Share Food Capstone Project</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Amiko:700|Alata|Kosugi|M+PLUS+Rounded+1c|Nanum+Gothic+Coding|Raleway:900|Staatliches&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" type="text/css" href="portfolio.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg fixed-top bg-dark">  
+        
+                  <a class="navbar-brand nav-link" href="index.html"><i class="far fa-map"></i></a>
+
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">     
+                <ul class="navbar-nav mr-4">
+                 <li class="nav-item">
+                    <a class="nav-link" data-value="resume" href="resume.pdf">Resume</a>        
+                 </li>  
+                 <li class="nav-item">
+                    <a class="nav-link activepage" data-value="portfolio"href="sharefood.html">Portfolio</a>    
+                 </li>
+                 <li class="nav-item"> 
+                    <a class="nav-link " data-value="contact" href=mailto:amanda@amandakmetz.com>Contact</a>       
+                </li> 
+                </ul> 
+            </div>
+        </nav>
+
+
+            <div class="container-fluid container-portfolio">
+                
+                <div class ="row justify-content-center">
+                    <div class = "col-8 col-header">
+                        Share Food Program Capstone Project
+                    </div>
+                </div>
+                <div class ="row justify-content-center">
+                    <div class = "col-7 col-header-description">
+                        <strong>Philadelphia's Share Food Program was in need of a food pantry web map to serve its clients, but in order to 
+                        keep it up to date, an effective data management strategy needed to be designed and implemented.</strong>
+                        <br><br>This system will centralize data storage, while increasing its security and usability in other capacities.
+                        Future updates will expand upon this system, which will eventually encompass location data from all 
+                        of the organization's programs and distribution sites.
+                    </div>
+                </div>
+                
+                <div class="row justify-content-center">
+                    <div class="col-2 container-preview">
+                       <a href="sharestatic.html">
+                            <img class="img-fluid image" src="Greatest Current Need.png" alt="Static Maps">
+                            <div class="middle">
+                                <div class="text">Network Analysis</div>
+                            </div>
+                        </a>
+                        <p></p>
+                        <p class="img-desc">A series of static analytical maps designed to highlight areas of greatest need within the city</p>
+                    </div>
+                    <div class="col-2 container-preview">
+                        <a href="sharedata.html">
+                            <img class="img-fluid image" src="Database.png" alt="Database">
+                            <div class="middle">
+                                <div class="text">Database + Data Entry</div>
+                            </div>
+                        </a>
+                        <p class="img-desc">SQLite database designed to hold location data of food pantries with an custom data entry application</p>
+                    </div>
+                    <div class="col-2 container-preview">
+                        <a href="#">
+                            <img class="img-fluid image" src="Script.png" alt="Script">
+                            <div class="middle">
+                                <div class="text">Conversion Script</div>
+                            </div>
+                        </a>
+                        <p></p>
+                        <p class="img-desc">Temporary workflow featuring a Python script to geocode
+                        database entries and convert to a geojson object</p>
+                    </div>
+                    <div class="col-2 container-preview">
+                        <a href="sharemap.html">
+                            <img class="img-fluid image" src="PantryMap.png" alt="Share Food Pantry Web Map">
+                            <div class="middle">
+                                <div class="text">Food Pantry Web Map</div>
+                            </div>
+                        </a>
+                        <p></p>
+                        <p class="img-desc">Interactive Food Pantry Web Map for public use
+                        with a search function</p>
+                    </div>
+                </div>
+
+            </div>
+
+        
+        
+        
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <!-- Popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/669403426f.js" crossorigin="anonymous"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

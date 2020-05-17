@@ -1,0 +1,181 @@
+html, body {
+  background: white;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-size:15px;
+  text-align:center;
+  height:100%;
+}
+
+
+.navbar{ 
+    background: rgba(0, 0, 0, 0.8);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size:20px;
+}
+
+.navbar-brand{ 
+}
+
+.nav-link{ 
+    margin-right: 1em;
+    color:gray;
+    cursor:pointer;
+}
+
+.nav-link:hover{  
+    color: lightgray; 
+}
+
+.activepage{
+    color: white;
+}
+.activepage:hover{
+    color: white;
+}
+.navbar-collapse{ 
+    justify-content: flex-end;
+}
+
+.navbar-toggler{  
+    background:#fff;
+}
+.bg-dark{
+    background-color:#343a40;
+}
+
+.sidebar {
+    font-family: 'Istok Web', sans-serif;
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: white;
+    border-right: 1px solid #eee;
+    width:350px;
+}
+
+.sidebar #sidebar-title{
+    font-size:25px;
+    font-weight:700;
+    padding:0px;
+}
+
+.sidebar a:link {
+    color: darkorange;
+    text-decoration: none;     
+}
+
+.sidebar a:visited {
+    color: darkorange;
+    text-decoration: none;
+}
+.sidebar a:active {
+    color: 	red;
+    text-decoration: none;
+}
+.sidebar a:hover {
+    color: 	red;
+    text-decoration: none;
+}
+
+.sidebar .listings{
+    text-align: center;
+    font-size: 1em;
+    padding-top: 5%;
+    padding-bottom: 10%;
+/* try adding back in 
+    bottom:0px;
+    left:0;
+*/
+}
+
+.sidebar .listings .active { 
+    background-color: whitesmoke;
+    color: black;
+}
+.sidebar .listings .item{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+#search-miles{
+    font-size:15px;
+    margin: 0 auto;
+    width: 95%;
+    text-align: left;
+    border: 0px;
+    padding-left: 5%;
+    padding-top:0px;
+    padding-bottom:0px;
+
+}
+#search-miles .search-element{
+    padding-bottom:0px;
+    padding-top:10px;
+}
+#search-miles input{
+    font-size:15px;
+}
+#search-miles #num_radius{
+    width: 100px;
+}
+#search-miles #geo_add{
+    width: 250px;
+}
+#search-miles #geo_city{
+    width: 250px;
+}
+#search-miles #geo_zip{
+    width: 100px;
+}
+#search-miles #button_submit{
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:39px;
+    padding-right:39px;
+}
+#search-miles #button_clear{
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:39px;
+    padding-right:39px;
+}
+#search-miles #button_reset{
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:93px;
+    padding-right:93px;
+}
+
+.leaflet-popup-content-wrapper {
+    font-family: 'Istok Web';
+    font-size: 13px;
+}
+.main{
+    top:60px;
+    padding-top:0px;
+    padding-right: 0px;
+    padding-left: 350px; /* 350 = sidebar width */
+    padding-bottom: 0px;
+/*    background-color: purple;*/
+    height: 660px;
+    width: 200px;
+}
+
+#map
+{
+    min-height: 100%;
+    min-width: 100%;
+    display: block;
+    z-index:9999;
+}
+
+
+
+
