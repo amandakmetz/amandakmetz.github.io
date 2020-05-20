@@ -1,0 +1,135 @@
+<!--
+Food Pantry Web Map
+Portfolio Website Edition
+-->
+
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web:wght@400;700|Manrope:wght@500;600;700;800|Roboto|Roboto+Condensed|Scada|Spartan|Roboto|Amiko:700|Alata|Kosugi|M+PLUS+Rounded+1c|Nanum+Gothic+Coding|Raleway:900|Staatliches&display=swap" rel="stylesheet">
+    
+    <title>Amanda Kmetz - GIS Portfolio - Food Pantry Locator</title>
+    
+    <link href="sharemap.css" rel="stylesheet">
+    
+</head>
+    
+<body>
+
+        <nav class="navbar navbar-expand-lg fixed-top bg-dark">  
+        
+                  <a class="navbar-brand nav-link" href="index.html"><i class="far fa-map"></i>   &nbsp;&nbsp;Home</a>
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">     
+                <ul class="navbar-nav mr-4">
+                 <li class="nav-item">
+                    <a class="nav-link" data-value="resume" href="resume.pdf">Resume</a>        
+                 </li>  
+                 <li class="nav-item">
+                    <a class="nav-link activepage" data-value="portfolio"href="sharefood.html">Portfolio</a>    
+                 </li>
+                 <li class="nav-item"> 
+                    <a class="nav-link " data-value="contact" href=mailto:amanda@amandakmetz.com>Contact</a>       
+                </li> 
+                </ul> 
+            </div>
+        </nav>
+              
+    
+    
+   <div class="container-fluid">
+        <div class="row">
+        <div class="sidebar">
+            <div id="sidebar-title">
+
+                <img src="sharelogo_lg.jpg" alt="Share Logo" width=70% height=9%>
+                <br>Food Pantry Locator
+
+            </div>
+            <hr>
+            <form name ="search" id="search-miles" action="#">
+                <div class="search-element">
+                    <label for="radius"><strong>Search Radius:</strong></label><br>
+                    <select type="number" name="radius" id="num_radius" > 
+                        <option value="1" selected>1 Mile </option>
+                        <option value="3">3 Miles</option>
+                        <option value="5">5 Miles</option>
+                        <option value="10">10 Miles</option>
+                        <option value="25">25 Miles</option>
+                    </select>
+                </div>
+                <div class="search-element">
+                    <label for="geo_a"><strong>Street Address:</strong></label><br>
+                    <input type="text" name="geo_a" value = "" id="geo_add"><br>
+                </div>
+                <div class="search-element">
+                    <label for="geo_c"><strong>City:</strong></label><br>
+                    <input type="text" name="geo_c" value = "" id="geo_city"><br>
+                </div>
+                <div class="search-element">    
+                    <label for="geo_z"><strong>ZIP:</strong></label><br>
+                    <input type="text" name="geo_z" value = "" id="geo_zip">
+                </div>
+                <div class="search-element"><br>
+
+                    <input type="button" name="submit" value="Search" id="button_submit" onclick="processFormData();" />
+
+                    &nbsp;
+                    <input type="button" name="clear" value="Clear" id="button_clear" onclick="clearInput();" />
+
+                    <br><br>
+                    <input type="button" name="reset" value="Reset Map" id="button_reset" onclick="resetMap();" />
+                </div>
+
+                </form>
+                <hr>
+                <div id="listings" class="listings"></div>
+
+        </div>
+            
+        <div class="col-sm-12 main">
+
+            <div id="map"></div>
+
+        </div>
+    </div>
+</div>
+
+    <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/669403426f.js" crossorigin="anonymous"></script>
+    <!-- Leaflet.js  -->
+    
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+    <!-- JQuery  -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <!-- Popper  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!-- Bootstrap  -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    
+        <script src="pantries.js"></script>
+        <script src="sharemap.js"></script>
+    
+</body>
+</html>

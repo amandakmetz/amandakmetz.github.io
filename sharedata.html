@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Amanda Kmetz - GIS Portfolio - Food Pantry Database </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Amiko:700|Alata|Kosugi|M+PLUS+Rounded+1c|Nanum+Gothic+Coding|Raleway:900|Staatliches&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" type="text/css" href="portfolio.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg fixed-top bg-dark">  
+        
+                  <a class="navbar-brand nav-link" href="index.html"><i class="far fa-map"></i>   &nbsp;&nbsp;Home</a>
+
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">     
+                <ul class="navbar-nav mr-4">
+                 <li class="nav-item">
+                    <a class="nav-link" data-value="resume" href="resume.pdf">Resume</a>        
+                 </li>  
+                 <li class="nav-item">
+                    <a class="nav-link activepage" data-value="portfolio"href="sharefood.html">Portfolio</a>    
+                 </li>
+                 <li class="nav-item"> 
+                    <a class="nav-link " data-value="contact" href=mailto:amanda@amandakmetz.com>Contact</a>       
+                </li> 
+                </ul> 
+            </div>
+        </nav>
+
+
+            <div class="container-fluid container-portfolio">
+                
+                <div class = "row">
+                    <div class = "col-2"></div>
+                    <div class = "col-8 col-header">
+                        Food Pantry Database
+                    </div>
+                    <div class = "col-2"></div>
+                </div>
+                <div class = "row justify-content-center">
+                    <div class = "col-5 col-header-description">
+                        <strong>A SQLite database created to replace the flat files storing information about the Share Food Program's pantries and their activities.</strong>
+                    </div>
+
+                </div>
+                
+                <div class="row justify-content-center">
+                    <div class="col-4 container-preview">
+                            <img class="img-fluid img-db" src="ERD_2.png" alt="ERD">
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-5 container-preview">
+                        <p></p>
+                        <p class="db-text">The core of the new Share Food database is the <strong>pantry</strong> table. This will hold current locations and contact information for food pantries within the program's network.</p>
+                        <p class="db-text">To model the relationships between food pantries and their parent organizations appropriately, a <strong>host</strong> table was added to hold separate information for the broader organization that may operate several of Share's sites.</p>
+                        <p class="db-text">Food pantries update their information several times per year in the form of surveys, and those responses will be logged in the <strong>pantry_survey</strong> table.  The responses from each new survey may be used to update the <strong>pantry</strong> table, but this table can be used to track all the surveys that a pantry has taken.</p>
+                        <p class="db-text">The <strong>pantry_delivery</strong> table will track all deliveries made by Share to a food pantry.</p>
+                    </div>
+                </div>
+                
+            </div>
+
+        
+        
+        
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <!-- Popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/669403426f.js" crossorigin="anonymous"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

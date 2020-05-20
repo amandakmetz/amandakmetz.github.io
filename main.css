@@ -1,0 +1,85 @@
+html, body {
+
+    background-image: url("mapbg3.png");
+    font-family: 'Roboto', sans-serif;
+    font-size:15px;
+    color: black;
+    height: 100%;
+    background-position: stretch;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.navbar{ 
+    background: rgba(0, 0, 0, 0.8);
+    z-index:9999999;
+}
+.navbar-brand{ 
+}
+
+.nav-link{ 
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size:20px;
+    margin-right: 1em;
+    color:gray;
+    cursor:pointer;
+}
+
+.nav-link:hover{  
+    color: lightgray; 
+}
+
+.activepage{
+    color: white;
+}
+.activepage:hover{
+    color: white;
+}
+.navbar-collapse{ 
+    justify-content: flex-end;
+}
+
+.navbar-toggler{  
+    background:#fff;
+}
+.bg-dark{
+    background-color:#343a40;
+}
+
+
+.container-home{
+    padding: 0 0;
+    margin: 0 0;
+    text-align: center;
+}
+
+.col-header{
+    text-align: center;
+    padding-top:200px;
+    padding-bottom:10px;
+    color: #479;
+    font-family: 'Alata', sans-serif;
+    font-size:60px;
+
+
+}
+.col-header-description{
+
+    padding-top:0px;
+    padding-bottom:25px;    
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size:22px;
+    color:#555;
+}
+
+p{
+
+}
+
+
+.container-preview{
+/*  border: 1px solid black;*/
+  padding: 5px;
+    
+}
