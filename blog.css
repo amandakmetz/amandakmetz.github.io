@@ -2,13 +2,12 @@
 
 html, body {
 
-    background:white;
+    background:whitesmoke;
     font-family: 'Roboto', sans-serif;
     font-size:15px;
     color: black;
     height: 100%;
     overflow-x:hidden;
-    overflow-y:hidden;
 }
 
 .navbar{ 
@@ -48,7 +47,7 @@ html, body {
     background-color:#343a40;
 }
 
-.container-portfolio{
+.container-blog{
     padding: 0 0;
     margin: 0 0;
     text-align: center;
@@ -72,10 +71,37 @@ html, body {
     font-size:18px;
 }
 
-p{
-    font-size:12px;
+.col-header-blog{
+    text-align: center;
+    padding-top:100px;
+    padding-bottom:10px;
+    color: #D56B2F;
+    font-family: 'Alata', sans-serif;
+    font-size:20px;
+
+}
+.col-header-blog-post{
+    text-indent:20px;
+    text-align: left;
+    padding:25px;
+    
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight:500;
+    border: 1px solid black;
+    background:white;
 }
 
+p{
+    font-size:14px;
+    line-height:2.5;
+}
+
+.blog-subtext{
+    color: darkgray;
+    font-family: 'Alata', sans-serif;
+    font-size:14px;
+    font-weight:500;
+}
 
 .container-preview{
 /*  border: 1px solid black;*/
