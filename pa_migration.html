@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Amanda Kmetz - GIS Portfolio - Food Pantry Database </title>
+        <title>Amanda Kmetz - GIS Portfolio - PA County Migration </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -13,7 +13,7 @@
 
         <!-- Font Awesome CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        
+
         <link rel="stylesheet" type="text/css" href="portfolio.css">
     </head>
     <body>
@@ -46,30 +46,50 @@
                 <div class = "row">
                     <div class = "col-2"></div>
                     <div class = "col-8 col-header">
-                        Food Pantry Database
+                        PA County Migration
                     </div>
                     <div class = "col-2"></div>
                 </div>
                 <div class = "row justify-content-center">
-                    <div class = "col-5 col-header-description">
-                        <strong>A SQLite database created to replace the flat files storing information about the Share Food Program's pantries and their activities.</strong>
+                    <div class = "col-9 col-header-description">
+                        <strong>An investigation into Pennsylvania's migration patterns using IRS data.</strong>
+                        
+                        
                     </div>
 
                 </div>
                 
+
                 <div class="row justify-content-center">
-                    <div class="col-4 container-preview">
-                            <img class="img-fluid img-db" src="ERD_2.png" alt="ERD">
+                    <div class="col-5 container-preview">
+                        <a href="pa_mig_diff_state.png">
+                            <img class="img-fluid img-db" src="pa_mig_diff_state.png" alt="PA County Migration - Different State">
+
+                        </a>                        
                     </div>
                     <div class="col-1"></div>
                     <div class="col-5 container-preview">
-                        <p></p>
-                        <p class="db-text">The core of the new Share Food database is the <strong>pantry</strong> table. This will hold current locations and contact information for food pantries within the program's network.</p>
-                        <p class="db-text">To model the relationships between food pantries and their parent organizations appropriately, a <strong>host</strong> table was added to hold separate information for the broader organization that may operate several of Share's sites.</p>
-                        <p class="db-text">Food pantries update their information several times per year in the form of surveys, and those responses will be logged in the <strong>pantry_survey</strong> table.  The responses from each new survey may be used to update the <strong>pantry</strong> table, but this table can be used to track all the surveys that a pantry has taken.</p>
-                        <p class="db-text">The <strong>pantry_delivery</strong> table will track all deliveries made by Share to a food pantry.</p>
+                        <br>
+                        
+                        <p class="db-text">This project examines county-to-county migration in Pennsylvania by analyzing the 2017-2018 IRS migration dataset, which can be found on the <a href="https://www.irs.gov/statistics/soi-tax-stats-migration-data-2017-2018">IRS website</a>.</p>
+                        
+                        
+                        <p class="db-text">Data was retrieved as a .csv file, containing a row for each county-to-county flow. Some flows were aggregated (Total Migration-US and Foreign) while some reflected a single county to another county.  Specific flows with fewer than 20 returns or exemptions are obscured from this dataset for privacy.</p>
+                        
+                        
+                        <p class="db-text">An <a href="https://github.com/amandakmetz/pa_migration/blob/master/PA_inbound.R">R script</a> was written to do the following:
+                            <ol>
+                            <li> Import and clean the data </li>
+                            <li> Write to a new table in a SQLite database</li>
+                           <li> Pivot the data so rows reflect individual Pennsylvania counties</li>
+                            <li> Join the table to a county shapefile in preparation for visualization</li>      
+                        </ol>
+                        </p>
+                        
+                        <p class="db-text">Maps were designed in ArcGIS Pro to show the percent of migrants in 2018 who had moved to each Pennsylvania county from a different state.</p>
                     </div>
                 </div>
+
                 
             </div>
 

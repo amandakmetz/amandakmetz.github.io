@@ -71,6 +71,14 @@ html, body {
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size:18px;
 }
+.col-header-center{
+    text-align: center;
+    padding-top:200px;
+    padding-bottom:10px;
+    color: #D56B2F;
+    font-family: 'Alata', sans-serif;
+    font-size:45px;
+}
 
 p{
     font-size:12px;
@@ -140,4 +148,7 @@ a:link{
 }
 .img-db{
     border: 1px solid black;
+}
+ol{
+    text-align: left;
 }

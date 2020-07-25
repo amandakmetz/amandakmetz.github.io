@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Amanda Kmetz - GIS Portfolio - Food Pantry Database </title>
+        <title>Amanda Kmetz - GIS Portfolio - Share Food Capstone Project</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -43,34 +43,37 @@
 
             <div class="container-fluid container-portfolio">
                 
-                <div class = "row">
-                    <div class = "col-2"></div>
-                    <div class = "col-8 col-header">
-                        Food Pantry Database
+                <div class ="row justify-content-center">
+                    <div class = "col-8 col-header-center" padding-top="200px">
+                        <div padding-top=200px>GIS PORTFOLIO</div>
+<!--                        GIS Portfolio-->
                     </div>
-                    <div class = "col-2"></div>
-                </div>
-                <div class = "row justify-content-center">
-                    <div class = "col-5 col-header-description">
-                        <strong>A SQLite database created to replace the flat files storing information about the Share Food Program's pantries and their activities.</strong>
-                    </div>
-
                 </div>
                 
                 <div class="row justify-content-center">
-                    <div class="col-4 container-preview">
-                            <img class="img-fluid img-db" src="ERD_2.png" alt="ERD">
-                    </div>
-                    <div class="col-1"></div>
-                    <div class="col-5 container-preview">
+                    <div class="col-2 container-preview">
+                       <a href="pa_migration.html">
+                            <img class="img-fluid image" src="pa_mig_preview.png" alt="PA Migration">
+                            <div class="middle">
+                                <div class="text">PA Migration</div>
+                            </div>
+                        </a>
                         <p></p>
-                        <p class="db-text">The core of the new Share Food database is the <strong>pantry</strong> table. This will hold current locations and contact information for food pantries within the program's network.</p>
-                        <p class="db-text">To model the relationships between food pantries and their parent organizations appropriately, a <strong>host</strong> table was added to hold separate information for the broader organization that may operate several of Share's sites.</p>
-                        <p class="db-text">Food pantries update their information several times per year in the form of surveys, and those responses will be logged in the <strong>pantry_survey</strong> table.  The responses from each new survey may be used to update the <strong>pantry</strong> table, but this table can be used to track all the surveys that a pantry has taken.</p>
-                        <p class="db-text">The <strong>pantry_delivery</strong> table will track all deliveries made by Share to a food pantry.</p>
+
+                    </div>
+
+                    <div class="col-2 container-preview">
+                        <a href="sharefood.html">
+                            <img class="img-fluid image" src="PantryMap.png" alt="Share Food">
+                            <div class="middle">
+                                <div class="text">Share Food Program</div>
+                            </div>
+                        </a>
+                        <p></p>
+
                     </div>
                 </div>
-                
+
             </div>
 
         
